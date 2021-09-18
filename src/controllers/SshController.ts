@@ -1,11 +1,8 @@
-/* eslint-disable import/no-unresolved  */
-/* eslint-disable no-unused-vars */
-import { NextFunction, Request, Response } from 'express';
-// eslint-disable-next-line
-import SSHService from '../service/ssh/index';
+import { Request, Response } from 'express';
+import SSHService from '../Services/ssh/SshService';
 
-export default class SSH {
-  static async test(req: Request, res: Response, next: NextFunction) {
+export default class SshController {
+  static async command(req: Request, res: Response) {
     try {
       const { body } = req;
       const { command, directory, params } = body;

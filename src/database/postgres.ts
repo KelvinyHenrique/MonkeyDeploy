@@ -27,7 +27,7 @@ export default class Pg {
     } catch (err) {
       return {
         error: 1,
-        errorCode: 'DB1',
+        errorCode: 'PG001',
         message: 'Ocorreu um erro ao executar a query',
         fullError: err,
       };

@@ -1,8 +1,8 @@
 import express from 'express';
-import SSH from '../controllers/SshController';
+import SshController from '../Controllers/SshController';
 
 const router = express.Router();
 
-router.post('/command', SSH.test);
+router.post('/command', SshController.command);
 
 module.exports = router;

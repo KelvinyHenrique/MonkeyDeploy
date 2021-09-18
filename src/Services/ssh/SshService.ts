@@ -1,12 +1,7 @@
 import { NodeSSH } from 'node-ssh';
-/* import Mongo from '../../database/mongo'; */
-import Pg from '../../database/postgres';
 
 export default class SSHService {
   static async command(comand: string, params: Array<string>, directory: string) {
-    const pg = new Pg();
-    pg.query('fgdsg');
-    /*  mongo.listDatabases(); */
     try {
       const ssh = new NodeSSH();
       await ssh.connect({

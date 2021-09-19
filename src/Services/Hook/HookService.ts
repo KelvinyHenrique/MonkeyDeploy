@@ -17,12 +17,15 @@ export default class HookService {
   }
 
   github(event: any) {
-    const actionService = new ActionService();
+    const action = new ActionService();
     this.githubEvent = event;
     try {
-      const { eventType, ref, action } = this.githubEvent;
-      if (eventType === 'pull_request' && ref === 'refs/heads/main' && action === 'closed') {
-        actionService.pull();
+      if (
+        this.githubEvent
+        && this.githubEvent.eventType === 'pull_request'
+        && this.githubEvent.ref === 'refs/heads/feature/1453-Redesign'
+      ) {
+        action.pull();
         console.log('Build on server finished');
       } else {
         console.log('Not action');

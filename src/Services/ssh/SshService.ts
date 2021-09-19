@@ -27,7 +27,7 @@ export default class SshService {
         tryKeyboard: true,
       });
       const response = await ssh.execCommand(command, { cwd: directory });
-      return { error: response.code || null, message: 'Comando executado com sucesso', response };
+      return { error: response.code, message: 'Comando executado com sucesso', response };
     } catch (error) {
       console.error(error);
       return { error: 1, message: 'Error in connect into server', fullError: error };

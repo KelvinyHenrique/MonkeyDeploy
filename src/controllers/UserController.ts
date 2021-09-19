@@ -52,7 +52,7 @@ export default class UserController {
 
   static async delete(req: Request, res: Response) {
     try {
-      /* Teste 2 */
+      /* Teste */
       const { userId } = req.query;
 
       const user = new UserService();

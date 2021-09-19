@@ -5,11 +5,11 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(require('./routes'));
+app.use(require('./Routes'));
 
 dotenv.config();
 
-const port = 8031;
+const port = process.env.APP_PORT;
 app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+  console.info(`Listening on http://monkeydeploy.duckdns.org:${port}`);
 });

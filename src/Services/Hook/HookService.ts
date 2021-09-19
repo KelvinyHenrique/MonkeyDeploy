@@ -20,7 +20,7 @@ export default class HookService {
     const actionService = new ActionService();
     this.githubEvent = event;
     try {
-      console.log(this.githubEvent);
+      console.log(this.githubEvent.base.ref);
       const { eventType, ref, action } = this.githubEvent;
       console.log(`Event Type: ${eventType}`);
       console.log(`Ref: ${ref}`);

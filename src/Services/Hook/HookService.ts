@@ -23,13 +23,10 @@ export default class HookService {
     try {
       // eslint-disable-next-line prefer-const
       let { eventType, ref, action } = this.githubEvent;
-      if (this.githubEvent.base && this.githubEvent.base.ref) {
-        ref = this.githubEvent.base.ref;
+      if (this.githubEvent.pull_request && this.githubEvent.pull_request.base) {
+        ref = this.githubEvent.pull_request.base.ref;
       }
-      console.log(`Event Type: ${eventType}`);
-      console.log(`Ref: ${ref}`);
-      console.log(`Action: ${action}`);
-      if (eventType === 'pull_request' && ref === 'refs/heads/main' && action === 'closed') {
+      if (eventType === 'pull_request' && ref === 'main' && action === 'closed') {
         actionService.pull();
         console.log('Build on server finished');
       } else {

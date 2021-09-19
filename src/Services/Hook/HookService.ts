@@ -17,7 +17,7 @@ export default class HookService {
   }
 
   github(event: any) {
-    const action = new ActionService();
+    const actionService = new ActionService();
     this.githubEvent = event;
     try {
       console.log(this.githubEvent);

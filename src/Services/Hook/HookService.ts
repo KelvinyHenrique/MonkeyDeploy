@@ -19,9 +19,13 @@ export default class HookService {
   github(event: any) {
     const actionService = new ActionService();
     this.githubEvent = event;
+
     try {
-      console.log(this.githubEvent.base.ref);
-      const { eventType, ref, action } = this.githubEvent;
+      // eslint-disable-next-line prefer-const
+      let { eventType, ref, action } = this.githubEvent;
+      if (this.githubEvent.base && this.githubEvent.base.ref) {
+        ref = this.githubEvent.base.ref;
+      }
       console.log(`Event Type: ${eventType}`);
       console.log(`Ref: ${ref}`);
       console.log(`Action: ${action}`);
@@ -29,10 +33,11 @@ export default class HookService {
         actionService.pull();
         console.log('Build on server finished');
       } else {
-        console.log('Not action');
+        console.log('No action taken');
       }
       return { hello: 'hello' };
     } catch (error) {
+      console.error(error);
       return { error: 1, fullError: error };
     }
   }

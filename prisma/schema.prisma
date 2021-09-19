@@ -11,11 +11,100 @@ generator client {
 }
 
 model user {
-  userId    Int       @id @default(autoincrement())
-  email     String
-  name      String    @unique
-  username  String
-  groupId   Int?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
+  user_id      Int           @id @unique @default(autoincrement())
+  email        String        @unique
+  name         String
+  username     String        @unique
+  password     String
+  created_at   DateTime      @default(now())
+  updated_at   DateTime?     @updatedAt
+  group        group?
+  group_member group_member?
+}
+
+model group {
+  group_id     Int           @id @unique @default(autoincrement())
+  name         String
+  description  String
+  user         user          @relation(fields: [owner_id], references: [user_id])
+  owner_id     Int
+  group_member group_member?
+  server       server?
+  hook         hook?
+}
+
+model group_member {
+  group_member_id   Int                @id @unique @default(autoincrement())
+  group_id          Int
+  user_id           Int
+  group             group              @relation(fields: [group_id], references: [group_id])
+  user              user               @relation(fields: [user_id], references: [user_id])
+  group_member_rule group_member_rule?
+
+}
+
+model group_member_rule {
+  group_member_rule_id Int          @id @unique @default(autoincrement())
+  group_member_id      Int
+  description          String
+  name                 String
+  rule_id              Int
+  rule                 rule         @relation(fields: [rule_id], references: [rule_id])
+  group_member         group_member @relation(fields: [group_member_id], references: [group_member_id])
+
+}
+
+model rule {
+  rule_id           Int                @id @unique @default(autoincrement())
+  name              String
+  description       String
+  type              String
+  group_member_rule group_member_rule?
+}
+
+model server {
+  server_id   Int     @id @default(autoincrement())
+  name        String
+  group_id    Int?
+  description String
+  host        String  @unique
+  username    String
+  password    String
+  port        Int
+  auth_method Int
+  private_key String
+  group       group?  @relation(fields: [group_id], references: [group_id])
+  action      action?
+
+}
+
+model hook {
+  hook_id     Int    @id @unique @default(autoincrement())
+  name        String
+  group_id    Int
+  event       String
+  origin      String
+  repos       String
+  description String
+  group       group  @relation(fields: [group_id], references: [group_id])
+}
+
+model action {
+  action_id   Int      @id @unique @default(autoincrement())
+  name        String
+  server_id   Int
+  hook_id     Int
+  description String
+  command     String
+  action_type String
+  start_at    DateTime
+  server      server   @relation(fields: [server_id], references: [server_id])
+}
+
+model action_rule {
+  action_rule_id Int    @id @unique @default(autoincrement())
+  description    String
+  name           String
+  related_rule   String
+
 }

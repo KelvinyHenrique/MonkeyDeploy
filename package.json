@@ -47,6 +47,7 @@
     "@types/nanoid": "^3.0.0",
     "@types/node": "^15.14.9",
     "@types/pino": "^6.3.8",
+    "@types/ssh2": "^0.5.48",
     "@types/yup": "^0.29.11",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",

@@ -6,7 +6,7 @@ export default class HookController {
     try {
       const user = new HookService();
       const { body } = req;
-      body.eventType = req.headers['x-github-event'];
+      body.eventType = req.headers['x-github-event'] || 'unrecognized';
       const response = user.github(body);
       res.json(response);
     } catch (error) {

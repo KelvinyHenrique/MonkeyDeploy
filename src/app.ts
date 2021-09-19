@@ -9,7 +9,7 @@ app.use(require('./Routes'));
 
 dotenv.config();
 
-const port = 8320;
+const port = process.env.APP_PORT;
 app.listen(port, () => {
-  console.log(`Listening on http://localhost:${port}`);
+  console.info(`Listening on http://localhost:${port}`);
 });

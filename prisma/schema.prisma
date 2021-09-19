@@ -10,12 +10,53 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model user {
-  userId    Int       @id @default(autoincrement())
-  email     String
-  name      String    @unique
-  username  String
-  groupId   Int?
+model User {
+  userId    Int       @id @unique @default(autoincrement())
+  email     String    @unique
+  name      String
+  username  String    @unique
+  password  String
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+  group    Group?
+  groupMember GroupMember?  
 }
+
+model Group {
+  groupId     Int    @id @unique @default(autoincrement())
+  name        String
+  description String
+  user        User   @relation(fields: [ownerId], references: [userId])
+  ownerId     Int
+  groupMember GroupMember?
+}
+
+model GroupMember {
+  groupMemberId  Int    @id @unique @default(autoincrement())
+  groupId Int
+  userId Int
+  group Group @relation(fields: [groupId], references: [groupId])
+  user  User @relation(fields: [userId], references: [userId])
+  groupMemberRule GroupMemberRule?
+  
+}
+
+model GroupMemberRule {
+    groupMemberRuleId     Int    @id @unique @default(autoincrement())
+    groupMemberId Int
+    description String
+    name String
+    ruleId Int
+    rule Rule @relation(fields: [ruleId], references: [ruleId])
+    groupMember GroupMember @relation(fields: [groupMemberId], references: [groupMemberId])
+
+}
+model Rule {
+  ruleId Int @id @unique @default(autoincrement())
+  name String
+  description String
+  type String
+  groupMemberRule GroupMemberRule?
+}
+
+

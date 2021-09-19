@@ -1,9 +1,24 @@
 export default class HookService {
-  // eslint-disable-next-line class-methods-use-this
+  data: any;
+
+  eventType: string;
+
+  githubEvent: any;
+
+  parsedData: any;
+
+  constructor() {
+    this.data = {};
+    this.githubEvent = {};
+    this.parsedData = {};
+    this.eventType = '';
+  }
+
   github(event: any) {
+    this.githubEvent = event;
     try {
-      if (event) {
-        console.log(event);
+      if (this.githubEvent) {
+        console.log(this.githubEvent);
       } else {
         console.log('Hoje não');
       }

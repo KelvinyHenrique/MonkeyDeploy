@@ -15,9 +15,8 @@ export default class ActionService {
   async pull() {
     try {
       const response = this.ssh.command({
-        command:
-          'git stash && git pull && cp ./config/alpha.env.js ./config/prod.env.js && ./build.run ',
-        directory: '/containers/DPCEcommerce/',
+        command: 'git stash && git pull',
+        directory: '/Api/MonkeyDeploy/',
       });
       return response;
     } catch (error) {

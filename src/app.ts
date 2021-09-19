@@ -11,5 +11,5 @@ dotenv.config();
 
 const port = process.env.APP_PORT;
 app.listen(port, () => {
-  console.info(`Listening on http://localhost:${port}`);
+  console.info(`Listening on http://monkeydeploy.duckdns.org:${port}`);
 });

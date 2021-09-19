@@ -11,52 +11,101 @@ generator client {
 }
 
 model User {
-  userId    Int       @id @unique @default(autoincrement())
-  email     String    @unique
-  name      String
-  username  String    @unique
-  password  String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
-  group    Group?
-  groupMember GroupMember?  
-}
-
-model Group {
-  groupId     Int    @id @unique @default(autoincrement())
+  userId      Int          @id @unique @default(autoincrement())
+  email       String       @unique
   name        String
-  description String
-  user        User   @relation(fields: [ownerId], references: [userId])
-  ownerId     Int
+  username    String       @unique
+  password    String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime?    @updatedAt
+  group       Group?
   groupMember GroupMember?
 }
 
+model Group {
+  groupId     Int          @id @unique @default(autoincrement())
+  name        String
+  description String
+  user        User         @relation(fields: [ownerId], references: [userId])
+  ownerId     Int
+  groupMember GroupMember?
+  server      Server?
+  hook        Hook?
+}
+
 model GroupMember {
-  groupMemberId  Int    @id @unique @default(autoincrement())
-  groupId Int
-  userId Int
-  group Group @relation(fields: [groupId], references: [groupId])
-  user  User @relation(fields: [userId], references: [userId])
+  groupMemberId   Int              @id @unique @default(autoincrement())
+  groupId         Int
+  userId          Int
+  group           Group            @relation(fields: [groupId], references: [groupId])
+  user            User             @relation(fields: [userId], references: [userId])
   groupMemberRule GroupMemberRule?
-  
+
 }
 
 model GroupMemberRule {
-    groupMemberRuleId     Int    @id @unique @default(autoincrement())
-    groupMemberId Int
-    description String
-    name String
-    ruleId Int
-    rule Rule @relation(fields: [ruleId], references: [ruleId])
-    groupMember GroupMember @relation(fields: [groupMemberId], references: [groupMemberId])
+  groupMemberRuleId Int         @id @unique @default(autoincrement())
+  groupMemberId     Int
+  description       String
+  name              String
+  ruleId            Int
+  rule              Rule        @relation(fields: [ruleId], references: [ruleId])
+  groupMember       GroupMember @relation(fields: [groupMemberId], references: [groupMemberId])
 
 }
+
 model Rule {
-  ruleId Int @id @unique @default(autoincrement())
-  name String
-  description String
-  type String
+  ruleId          Int              @id @unique @default(autoincrement())
+  name            String
+  description     String
+  type            String
   groupMemberRule GroupMemberRule?
 }
 
+model Server {
+  serverId       Int     @id @unique @default(autoincrement())
+  name           String
+  groupId        Int
+  description    String
+  host           String
+  username       String
+  password       String
+  port           String
+  authMethod     Int
+  actionActionId Int
+  privateKey     String
+  group          Group   @relation(fields: [groupId], references: [groupId])
+  action         Action?
 
+}
+
+model Hook {
+  hookId      Int    @id @unique @default(autoincrement())
+  name        String
+  groupId     Int
+  event       String
+  origin      String
+  repos       String
+  description String
+  group       Group  @relation(fields: [groupId], references: [groupId])
+}
+
+model Action {
+  actionId    Int      @id @unique @default(autoincrement())
+  name        String
+  serverId    Int
+  hookId      Int
+  description String
+  command     String
+  actionType  String
+  startAt     DateTime
+  server      Server   @relation(fields: [serverId], references: [serverId])
+}
+
+model ActionRule {
+  actionRuleId Int    @id @unique @default(autoincrement())
+  description  String
+  name         String
+  relatedRule  String
+
+}

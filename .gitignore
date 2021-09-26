@@ -3,5 +3,4 @@ node_modules
 .env
 id_rsa
 node_modules
-package-lock.json
 dist

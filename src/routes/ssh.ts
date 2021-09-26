@@ -1,5 +1,5 @@
 import express from 'express';
-import SshController from '../Controllers/SshController';
+import SshController from '../controllers/SshController';
 
 const router = express.Router();
 

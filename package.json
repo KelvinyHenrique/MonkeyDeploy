@@ -11,6 +11,9 @@
     "start": "node .dist/src/app.js"
   },
   "keywords": [],
+  "engines": {
+    "node": "14.17.6"
+  },
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^3.0.2",

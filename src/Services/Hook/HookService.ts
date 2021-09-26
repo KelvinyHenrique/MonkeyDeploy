@@ -17,7 +17,7 @@ export default class HookService {
   }
 
   github(event: any) {
-    const actionService = new ActionService();
+    /* const actionService = new ActionService(); */
     this.githubEvent = event;
 
     try {
@@ -27,7 +27,7 @@ export default class HookService {
         ref = this.githubEvent.pull_request.head.ref;
       }
       if (eventType === 'pull_request' && ref === 'main' && action === 'closed') {
-        actionService.pull();
+        // actionService.pull();
         console.log('Build on server finished');
       } else {
         console.log('No action taken');
@@ -37,5 +37,9 @@ export default class HookService {
       console.error(error);
       return { error: 1, fullError: error };
     }
+  }
+
+  github(event: any) {
+
   }
 }

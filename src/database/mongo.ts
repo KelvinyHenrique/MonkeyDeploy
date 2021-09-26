@@ -12,9 +12,9 @@ export default class Mongo {
 
   async main() {
     try {
-      await this.client.connect();
+      return await this.client.connect();
     } catch (err) {
-      console.error(err);
+      return err;
     } finally {
       await this.client.close();
     }
@@ -26,10 +26,9 @@ export default class Mongo {
     try {
       await this.client.connect();
       databasesList = await this.client.db().admin().listDatabases();
-      console.log('Databases:');
-      console.log(databasesList.databases);
+      return databasesList.databases;
     } catch (err) {
-      console.error(err);
+      return err;
     } finally {
       await this.client.close();
     }

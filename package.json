@@ -1,12 +1,12 @@
 {
   "name": "monkeydeploy",
   "version": "1.0.0",
-  "description": "",
+  "description": "Ferramenta de autodeploy",
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "src --out-dir dist"
+    "build": "tsc --outDir dist"
   },
   "keywords": [],
   "author": "",

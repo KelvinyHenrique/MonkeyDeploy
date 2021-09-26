@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
-import UserService from '../Services/user/UserService';
+import ServerService from '../Services/ServerService';
 
-export default class UserController {
+export default class ServerController {
   static async create(req: Request, res: Response) {
     try {
-      const user = new UserService();
+      const server = new ServerService();
       const { body } = req;
-      const response = await user.create(body);
+      const response = await server.create(body);
       res.json(response);
     } catch (error) {
       res.status(500).json({ error });
@@ -15,9 +15,9 @@ export default class UserController {
 
   static async find(req: Request, res: Response) {
     try {
-      const { userId } = req.query;
-      const user = new UserService();
-      const response = await user.find(userId);
+      const { serverid } = req.query;
+      const server = new ServerService();
+      const response = await server.find(serverid);
       res.json(response);
     } catch (error) {
       res.status(500).json({ error });
@@ -26,8 +26,8 @@ export default class UserController {
 
   static async findAll(req: Request, res: Response) {
     try {
-      const user = new UserService();
-      const response = await user.findAll();
+      const server = new ServerService();
+      const response = await server.findAll();
       res.json(response);
     } catch (error) {
       res.status(500).json({ error });
@@ -38,8 +38,8 @@ export default class UserController {
     try {
       const { body } = req;
       if (body.data && body.where) {
-        const user = new UserService();
-        const response = await user.update(body.where, body.data);
+        const server = new ServerService();
+        const response = await server.update(body.where, body.data);
         res.json(response);
       } else {
         const response = { error: 1, errorCode: 2, message: 'Parâmetros enviados inválidos' };
@@ -53,10 +53,10 @@ export default class UserController {
   static async delete(req: Request, res: Response) {
     try {
       /* Teste */
-      const { userId } = req.query;
+      const { serverid } = req.query;
 
-      const user = new UserService();
-      const response = await user.delete(userId);
+      const server = new ServerService();
+      const response = await server.delete(serverid);
       res.json(response);
     } catch (error) {
       res.status(500).json({ error });

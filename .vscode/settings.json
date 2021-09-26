@@ -1,6 +1,8 @@
 {
     "cSpell.words": [
         "monkeydeploy",
-        "PGSQL"
+        "PGSQL",
+        "serverid",
+        "sshservice"
     ]
 }

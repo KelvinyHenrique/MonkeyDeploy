@@ -18,11 +18,13 @@ export default class HookService {
   }
 
   github(event: any) {
-    /* const actionService = new ActionService(); tT */
+    const actionService = new ActionService();
 
     try {
       const hook = this.parseGithubEvent(event);
-      console.log(hook);
+
+      actionService.send(hook);
+
       return { hello: 'hello' };
     } catch (error) {
       console.error(error);

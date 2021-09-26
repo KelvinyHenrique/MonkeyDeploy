@@ -9,7 +9,7 @@ app.use(require('./routes'));
 
 dotenv.config();
 
-const port = 8031;
+const port = process.env.PORT || 8031;
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });

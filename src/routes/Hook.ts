@@ -1,5 +1,5 @@
 import express from 'express';
-import HookController from '../Controllers/HookController';
+import HookController from '../controllers/HookController';
 
 const router = express.Router();
 

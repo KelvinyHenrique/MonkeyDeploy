@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(require('./Routes'));
+app.use(require('./routes'));
 
 dotenv.config();
 

@@ -2,7 +2,8 @@
   "name": "monkeydeploy",
   "version": "1.0.0",
   "description": "Ferramenta de autodeploy",
-  "main": "index.js",
+  "main": "dist/src/app.js",
+  "author": "Kelviny Henrique",
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +11,6 @@
     "start": "node .dist/src/app.js"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^3.0.2",

@@ -8,7 +8,7 @@
     "dev": "ts-node-dev --ignore-watch node_modules src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc --outDir dist",
-    "start": "node .dist/src/app.js"
+    "start": "node dist/src/app.js"
   },
   "keywords": [],
   "engines": {
